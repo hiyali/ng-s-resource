@@ -1,0 +1,31 @@
+{
+  "name": "ng-s-resource",
+  "version": "0.0.1",
+  "description": "Simple resource generator for Angular (version >= 2)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --project ./",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiyali/ng-s-resource.git"
+  },
+  "keywords": [
+    "angular",
+    "resource",
+    "simple",
+    "ng"
+  ],
+  "author": "Salam Hiyali",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hiyali/ng-s-resource/issues"
+  },
+  "homepage": "https://github.com/hiyali/ng-s-resource#readme",
+  "dependencies": {
+    "@angular/core": "^4.3.4",
+    "@angular/http": "^4.3.4",
+    "rxjs": "^5.4.3"
+  }
+}
