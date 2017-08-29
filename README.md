@@ -3,9 +3,9 @@ Simplify RESTful api resource generator for Angular (version >= 2)
 
 ## Quick look
 ```typescript
-PayService = this._res.create('/api/transaction/payInfo/:payReason') // 1. define
+UserService = this._res.create('/api/user/:id') // 1. define
 ...
-this.api.PayService.get(...)... // 2. usage
+this.api.UserService.get({ params: { id : 5 } })... // 2. usage
 ```
 
 ## Install
