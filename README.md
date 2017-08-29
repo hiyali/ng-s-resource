@@ -1,5 +1,5 @@
 # ng-s-resource
-Simple resource generator for Angular (version >= 2)
+Simplify RESTful api resource generator for Angular (version >= 2)
 
 ## Quick look
 ```typescript
@@ -24,7 +24,7 @@ npm i -S ng-s-resource
 | -------------------- | --------------- | --------------------------------------------- |
 | url                  | `String`        | Api url, and you can use api/user/`:id`, and use dynamic params { id: 2 } for replace it |
 | options[sub]         | `Object`|`null` | Resource options                              |
-| options[sub].params  | `Object`        | Resource params, like url params etc.         | 
+| options[sub].params  | `Object`        | Resource params, like url params etc.         |
 | options[sub].headers | `Object`        | Api headers, like { ...headers: { 'x-auth-token': '***' } } |
 | options[sub].data    | `Object`        | Api data, just use in these methods `post`, `put`, `patch` |
 | options[sub].method  | `String`        | Api method type, like `get`, `head`, `delete`, `post`, `put`, `patch` |
@@ -111,7 +111,7 @@ export const Services = [
 * [Open a new issue for this repo](https://github.com/hiyali/ng-s-resource/issues)
 * [Send a Email to: hiyali920@gmail.com](mailto:hiyali920@gmail.com)
 
-## Is it useful? 
+## Is it useful?
 
 🌚 [Donate a github star ⍟](https://github.com/hiyali/ng-s-resource)
 
