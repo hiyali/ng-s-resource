@@ -1,26 +1,27 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "declaration": false,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
       "dom",
       "es2015"
     ],
-    "module": "amd",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
-    "outFile": "dist/index.js"
+    "declarationDir": "lib",
+    "outDir": "lib"
   },
   "include": [
-    "src/*.ts"
+    "src/main.ts"
   ],
   "exclude": [
     "node_modules"
   ],
-  "compileOnSave": false,
+  "compileOnSave": true,
   "atom": {
     "rewriteTsconfig": false
   }

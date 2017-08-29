@@ -1,11 +1,30 @@
-import { Http, RequestOptions } from '@angular/http'
+import { Http, RequestOptions, Headers } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 
+const createOptions = (options: any = null) => {
+  if (!options) {
+    return null
+  }
+  // params
+  const _options = new RequestOptions()
+  _options.params = options.params
+
+  // headers
+  if (options.headers) {
+    // _options.headers = new Headers(options.headers)
+    _options.headers = options.headers
+  }
+
+  return _options
+}
+
 export interface ApiDatableOptions {
-  params: any | null // get method query, 做成替换 url 里的 {/id} 字符的形式
+  headers: any | null
+  params: any | null
   data: any | null
 }
 export interface ApiOptions {
+  headers: any | null
   params: any | null
 }
 
@@ -16,21 +35,24 @@ export class ResourceCreator {
     private http: Http
   ) {
     this.options = options || {}
-    console.info('Create resource for url', url, options)
+    // console.info('Create resource for url', url, options)
   }
 
-  // + data.payReason
-  getUrl(runtimeParams: any = null) {
+  getUrl(runtimeOptions: any = null) {
+    if (!runtimeOptions) {
+      runtimeOptions = {}
+    }
+
+    const params = runtimeOptions.params || {}
     let url = this.url
-    const params = runtimeParams || {}
 
     while (true) {
-      const reg = new RegExp(/{\/\:?(\w*)}?/g) //    \/? {/name} 斜杠必须得有，并且在花括号里
+      const reg = new RegExp(/\:(\w*)?/g) // params in the url like :name
       const matched = reg.exec(url)
       if (!matched) break
 
       const uriName = matched[1]
-      const replaceWith = params[uriName] ? '/' + params[uriName] : ''
+      const replaceWith = params[uriName] ? params[uriName] : ''
       url = url.replace(matched[0], replaceWith)
     }
     return url
@@ -41,8 +63,13 @@ export class ResourceCreator {
       return JSON.parse(JSON.stringify(this.options))
     }
 
+    let headers = null
     let params = null
     let data = null
+
+    if (this.options['headers'] || runtimeOptions.headers) {
+      headers = { ...this.options['headers'], ...runtimeOptions.headers }
+    }
     if (this.options.params || runtimeOptions.params) {
       params = { ...this.options.params, ...runtimeOptions.params }
     }
@@ -51,57 +78,75 @@ export class ResourceCreator {
     }
 
     return {
+      headers,
       params,
       data
     }
   }
 
-  getSafeParams(runtimeParams: any = null) {
-    if (!runtimeParams) {
+  getSafeParams(runtimeOptions: any = null) {
+    if (!runtimeOptions) {
       return null
     }
+    const runtimeParams = runtimeOptions.params || {}
 
     const _params = JSON.parse(JSON.stringify(runtimeParams))
     let url = this.url
 
     while (true) {
-      const reg = new RegExp(/{\/\:?(\w*)}?/g) //    \/? {/name} 斜杠必须得有，并且在花括号里
+      const reg = new RegExp(/\:(\w*)?/g) // params in the url like :name
       const matched = reg.exec(url)
       if (!matched) break
 
       const uriName = matched[1]
-      const replaceWith = runtimeParams[uriName] ? '/' + runtimeParams[uriName] : ''
+      const replaceWith = runtimeParams[uriName] ? runtimeParams[uriName] : ''
       url = url.replace(matched[0], replaceWith)
 
-      if (matched[0].indexOf('/:') === 1) {
+      if (matched[0].indexOf(':') === 0) {
         const uriName = matched[1]
-        delete _params[uriName] // delete a child that like this {/:uriName} from params
+        delete _params[uriName] // delete a child that like this :uriName from params
       }
     }
 
-    const _options = new RequestOptions()
-    _options.params = _params
-    return _options
+    runtimeOptions.params = _params
+    return createOptions(runtimeOptions)
+  }
+
+  head(options: ApiOptions | null): Observable<any> {
+    const _options = this.getMergedOptions(options)
+    return this.http.head(this.getUrl(_options), this.getSafeParams(_options))
   }
 
   get(options: ApiOptions | null): Observable<any> {
     const _options = this.getMergedOptions(options)
-    return this.http.get(this.getUrl(_options.params), this.getSafeParams(_options.params))
-  }
-
-  post(options: ApiDatableOptions | null): Observable<any> {
-    const _options = this.getMergedOptions(options)
-    return this.http.post(this.getUrl(_options.params), _options.data, this.getSafeParams(_options.params))
-  }
-
-  put(options: ApiDatableOptions | null): Observable<any> {
-    const _options = this.getMergedOptions(options)
-    return this.http.put(this.getUrl(_options.params), _options.data, this.getSafeParams(_options.params))
+    return this.http.get(this.getUrl(_options), this.getSafeParams(_options))
   }
 
   delete(options: ApiOptions | null): Observable<any> {
     const _options = this.getMergedOptions(options)
-    return this.http.delete(this.getUrl(_options.params), this.getSafeParams(_options.params))
+    return this.http.delete(this.getUrl(_options), this.getSafeParams(_options))
+  }
+
+  /*
+  jsonp(options: ApiOptions | null): Observable<any> {
+    const _options = this.getMergedOptions(options)
+    return this.http.jsonp(this.getUrl(_options), this.getSafeParams(_options))
+  }
+  // */
+
+  post(options: ApiDatableOptions | null): Observable<any> {
+    const _options = this.getMergedOptions(options)
+    return this.http.post(this.getUrl(_options), _options.data, this.getSafeParams(_options))
+  }
+
+  put(options: ApiDatableOptions | null): Observable<any> {
+    const _options = this.getMergedOptions(options)
+    return this.http.put(this.getUrl(_options), _options.data, this.getSafeParams(_options))
+  }
+
+  patch(options: ApiDatableOptions | null): Observable<any> {
+    const _options = this.getMergedOptions(options)
+    return this.http.patch(this.getUrl(_options), _options.data, this.getSafeParams(_options))
   }
 
   /*
@@ -128,3 +173,4 @@ export class ResourceCreator {
   patch(url, [body], [options])
     */
 }
+

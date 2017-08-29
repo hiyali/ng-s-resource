@@ -1,17 +1,34 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Injector } from '@angular/core'
 import { Http } from '@angular/http'
 
 import { ResourceCreator as ACS } from './resource-creator'
 
 @Injectable()
 export class ResourcesManager {
+  http: Http
   ResourceInstances: Map<string, ACS>
 
-  constructor (private http: Http) {
+  constructor (
+    _http: Http
+  ) {
+    this.http = _http
     this.ResourceInstances = new Map()
   }
 
-  G(url:string, serviceOptions: any | null = null): any | ACS { // Get a API resource or resource bucket base on a url
+  init(_service: any) {
+    for (let prop in _service.Config) {
+      const _resource = _service.Config[prop]
+
+      if (typeof _resource === 'string') {
+        Object.defineProperty(_service, prop, { get: () => this.create(_resource) })
+      } else {
+        Object.defineProperty(_service, prop, { get: () => this.create(_resource.url, _resource.options) })
+      }
+    }
+  }
+
+  create(url:string, serviceOptions: any | null = null): any | ACS {
+    // Get a API resource or resource bucket base on a url
     // console.info('Get resource for url', url, serviceOptions)
     if (!serviceOptions) {
       if (this.ResourceInstances.has(url)) {

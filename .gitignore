@@ -1,4 +1,1 @@
 node_modules/
-
-# ignore before release
-dist/
