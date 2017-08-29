@@ -8,6 +8,15 @@ PayService = this._res.create('/api/transaction/payInfo/:payReason') // 1. defin
 this.api.PayService.get(...)... // 2. usage
 ```
 
+## Install
+```shell
+yarn add ng-s-resource
+```
+or
+```
+npm i -S ng-s-resource
+```
+
 ## Configuration
 > _res.create(url, [options])
 
@@ -95,3 +104,17 @@ export const Services = [
   Resources
 ]
 ```
+
+## Any problem?
+
+> Please let me know.
+* [Open a new issue for this repo](https://github.com/hiyali/ng-s-resource/issues)
+* [Send a Email to: hiyali920@gmail.com](mailto:hiyali920@gmail.com)
+
+## Is it useful? 
+
+🌚 [Donate a github star ⍟](https://github.com/hiyali/ng-s-resource)
+
+## License
+
+MIT
