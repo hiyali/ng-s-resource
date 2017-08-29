@@ -8,7 +8,9 @@ PayService = this._res.create('/api/transaction/payInfo/:payReason') // 1. defin
 this.api.PayService.get(...)... // 2. usage
 ```
 
-## Options
+## Configuration
+> _res.create(url, [options])
+
 | Name                 | Type            | Explain                                       |
 | -------------------- | --------------- | --------------------------------------------- |
 | url                  | `String`        | Api url, and you can use api/user/`:id`, and use dynamic params { id: 2 } for replace it |
@@ -17,6 +19,8 @@ this.api.PayService.get(...)... // 2. usage
 | options[sub].headers | `Object`        | Api headers, like { ...headers: { 'x-auth-token': '***' } } |
 | options[sub].data    | `Object`        | Api data, just use in these methods `post`, `put`, `patch` |
 | options[sub].method  | `String`        | Api method type, like `get`, `head`, `delete`, `post`, `put`, `patch` |
+
+> [sub] is your Service children name.
 
 ## Example
 ### Define
