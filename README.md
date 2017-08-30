@@ -1,5 +1,5 @@
 # ng-s-resource
-🏌🏽 Simplify RESTful api resource generator for Angular 4+
+🏌🏽 Simplify RESTful http resource generator for Angular 4+
 
 [![npm package](https://img.shields.io/npm/v/ng-s-resource.svg)](https://npmjs.com/package/ng-s-resource)
 [![NPM downloads](http://img.shields.io/npm/dm/ng-s-resource.svg)](https://npmjs.org/package/ng-s-resource)

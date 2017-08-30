@@ -1,7 +1,7 @@
 {
   "name": "ng-s-resource",
-  "version": "0.0.2",
-  "description": "Simplify RESTful api resource generator for Angular (version >= 2)",
+  "version": "0.0.3",
+  "description": "Simplify RESTful http resource generator for Angular (version >= 2)",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
