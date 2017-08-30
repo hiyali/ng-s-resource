@@ -1,5 +1,5 @@
 # ng-s-resource
-Simplify RESTful api resource generator for Angular (version >= 2)
+Simplify RESTful api resource generator for Angular 4+
 
 ## Quick look
 ```typescript
