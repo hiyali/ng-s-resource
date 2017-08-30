@@ -1,5 +1,8 @@
 # ng-s-resource
-Simplify RESTful api resource generator for Angular 4+
+🏌🏽 Simplify RESTful api resource generator for Angular 4+
+
+[![npm package](https://img.shields.io/npm/v/ng-s-resource.svg)](https://npmjs.com/package/ng-s-resource)
+[![NPM downloads](http://img.shields.io/npm/dm/ng-s-resource.svg)](https://npmjs.org/package/ng-s-resource)
 
 ## Quick look
 ```typescript
@@ -10,6 +13,8 @@ this.api.UserService.get({ params: { id : 5 } })... // 2. usage
 Also can use `...UserService. post | put | head | patch | delete`
 */
 ```
+
+![Screen shot](https://raw.githubusercontent.com/hiyali/ng-s-resource/master/assets/nice-shot.png "screenshot")
 
 ## Install
 ```shell
