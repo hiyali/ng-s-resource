@@ -6,6 +6,9 @@ Simplify RESTful api resource generator for Angular (version >= 2)
 UserService = this._res.create('/api/user/:id') // 1. define
 ...
 this.api.UserService.get({ params: { id : 5 } })... // 2. usage
+/*
+Also can use `...UserService. post | put | head | patch | delete`
+*/
 ```
 
 ## Install
@@ -45,10 +48,10 @@ export class ApiResources {
   constructor (private _http: Http) {
     this._res = new Resources(_http)
   }
-  get PayService () { return this._res.create('/api/transaction/payInfo/:payReason') }
+  get PayService () { return this._res.create('/api/transaction/payInfo/:payReason') } // any method
   get LoginService() { return this._res.create('/api/user/customer/registerOrLogin/:uriName', {
-    dynamicKey: { params: { uriName: 'finish' }, method: 'post' },
-    requestKey: { params: { uriName: 'request'} }
+    dynamicKey: { params: { uriName: 'finish' }, method: 'post' }, // just post
+    requestKey: { params: { uriName: 'request'} } // any method
   }) }
 }
 ```
@@ -65,9 +68,12 @@ export class AppComponent {
   someMethod () {
     const payReason = 'yo'
 
+    // get
     this.api.PayService.get({ params: { payReason }}).subscribe(res => {
       console.log(res)
     })
+
+    // post
     this.api.LoginService.dynamicKey({ data: { payReason }, headers: { 'token': 'asdf' }}).subscribe(res => {
       console.log(res)
     })
@@ -79,7 +85,7 @@ export class AppComponent {
 #### app.module.ts
 ```typescript
 import { HttpModule } from '@angular/http'
-import { Services } from '../services'
+import { AppServices } from '../services'
 ...
 @NgModule({
   ...
@@ -99,7 +105,7 @@ import { Resources } from 'ng-s-resource'
 import { ApiResources as API } from './api.service'
 
 export { API }
-export const Services = [
+export const AppServices = [
   API,
   Resources
 ]
