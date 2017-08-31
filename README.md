@@ -32,7 +32,7 @@ npm i -S ng-s-resource
 | Name                 | Type            | Explain                                       |
 | -------------------- | --------------- | --------------------------------------------- |
 | url                  | `String`        | Api url, and you can use api/user/`:id`, and use dynamic params { id: 2 } for replace it |
-| options[sub]         | `Object` or `null` | Service children name                      |
+| options[sub]         | `Object`        | Service children name                      |
 | options[sub].params  | `Object`        | Resource params, like url params etc.         |
 | options[sub].headers | `Object`        | Api headers, like { ...headers: { 'x-auth-token': '***' } } |
 | options[sub].data    | `Object`        | Api data, just use in these methods `post`, `put`, `patch` |
