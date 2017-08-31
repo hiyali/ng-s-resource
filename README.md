@@ -41,7 +41,7 @@ npm i -S ng-s-resource
 
 ## Example
 ### Define
-#### service/api.service.ts
+#### services/api.service.ts
 ```typescript
 import { Injectable } from '@angular/core'
 import { Http } from '@angular/http'
