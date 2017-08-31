@@ -27,17 +27,16 @@ npm i -S ng-s-resource
 
 ## Configuration
 > _res.create(url, [options])
+> Service.Sub([options])
 
 | Name                 | Type            | Explain                                       |
 | -------------------- | --------------- | --------------------------------------------- |
 | url                  | `String`        | Api url, and you can use api/user/`:id`, and use dynamic params { id: 2 } for replace it |
-| options[sub]         | `Object`|`null` | Resource options                              |
+| options[sub]         | `Object` or `null` | Service children name                      |
 | options[sub].params  | `Object`        | Resource params, like url params etc.         |
 | options[sub].headers | `Object`        | Api headers, like { ...headers: { 'x-auth-token': '***' } } |
 | options[sub].data    | `Object`        | Api data, just use in these methods `post`, `put`, `patch` |
 | options[sub].method  | `String`        | Api method type, like `get`, `head`, `delete`, `post`, `put`, `patch` |
-
-> [sub] is your Service children name.
 
 ## Example
 ### Define
