@@ -106,13 +106,11 @@ import { AppServices } from '../services'
 
 #### services/index.ts
 ```typescript
-import { Resources } from 'ng-s-resource'
 import { ApiResources as API } from './api.service'
 
 export { API }
 export const AppServices = [
-  API,
-  Resources
+  API
 ]
 ```
 
